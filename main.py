@@ -6,7 +6,8 @@ from mcp_use import MCPAgent, MCPClient
 import os
 
 
-async def ai_assistant():
+# Main Function
+async def ai_assistant(user_query):
     # Loading the environment variables
     load_dotenv()
     groq_api_key = os.getenv("GROQ_API_KEY")
@@ -34,19 +35,6 @@ async def ai_assistant():
     )
 
 
-    while True:
-        # Taking user input
-        user_input = input("\n Your Query: ")
-
-        # checking for exiting
-        if user_input.lower() in ['exit','quit']:
-            print('Ending Conversation!')
-            break
-
-        # Agent Response
-        agent_response = await agent.run(user_input)
-        print("\n AI Assistant Response: ",agent_response)
-
-
-# Calling the ai_assistant function
-asyncio.run(ai_assistant())
+    # Agent Response
+    agent_response = await agent.run(user_query)
+    return agent_response
